@@ -9,9 +9,16 @@ class Family extends Model
 {
     use HasFactory;
 
+    // protected $with = ['parent'];
+
     protected $fillable = [
         'name',
         'gender',
         'parent_id',
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo(Family::class, 'parent_id');
+    }
 }
