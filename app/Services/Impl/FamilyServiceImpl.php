@@ -23,6 +23,12 @@ class FamilyServiceImpl implements \App\Services\FamilyService
 
     public function updateFamily($params, $id)
     {
+        if (isset($params['parent_id'])) {
+            if ($params['parent_id'] === $id) {
+                throw new \Exception('Parent cannot be itself');
+            }
+        }
+
         return \App\Models\Family::where('id', $id)->update($params);
     }
 
